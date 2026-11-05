@@ -1,0 +1,47 @@
+[
+  {
+    "id": "job_001",
+    "title": "Junior Python Developer",
+    "company": "TechStart India",
+    "location": "Bangalore, India (Remote)",
+    "skills_required": ["Python", "REST APIs", "SQL"],
+    "experience_years": 1,
+    "description": "Build and maintain backend services for our fintech platform using Python and FastAPI."
+  },
+  {
+    "id": "job_002",
+    "title": "Data Analyst",
+    "company": "InsightCo",
+    "location": "Hyderabad, India",
+    "skills_required": ["Excel", "SQL", "Tableau", "Python"],
+    "experience_years": 2,
+    "description": "Analyse business data and create dashboards to support decision-making for leadership."
+  },
+  {
+    "id": "job_003",
+    "title": "Machine Learning Engineer",
+    "company": "AI Ventures",
+    "location": "Mumbai, India (Hybrid)",
+    "skills_required": ["Python", "TensorFlow", "MLOps", "Docker"],
+    "experience_years": 3,
+    "description": "Design and deploy ML models for recommendation and NLP use cases."
+  },
+  {
+    "id": "job_004",
+    "title": "Frontend Developer",
+    "company": "PixelCraft Studios",
+    "location": "Pune, India",
+    "skills_required": ["React", "JavaScript", "CSS", "REST APIs"],
+    "experience_years": 2,
+    "description": "Create responsive, accessible UIs for our SaaS product used by 50k+ users."
+  },
+  {
+    "id": "job_005",
+    "title": "DevOps Engineer",
+    "company": "CloudNine Systems",
+    "location": "Chennai, India",
+    "skills_required": ["Linux", "Docker", "Kubernetes", "CI/CD", "AWS"],
+    "experience_years": 3,
+    "description": "Manage cloud infrastructure, automate deployments, and ensure system reliability."
+  }
+]

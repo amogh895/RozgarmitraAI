@@ -1,0 +1,35 @@
+﻿# Credentials - NEVER commit
+.env
+.streamlit/secrets.toml
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+
+# Runtime data (generated at runtime)
+data/user_profiles.json
+data/chat_history.json
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Node (rozgar-mitra subfolder) - all node_modules at any depth
+**/node_modules/
+rozgar-mitra/backend/dist/
+rozgar-mitra/frontend/dist/
+rozgar-mitra/backend/.env
+
+# SQLite runtime files
+**/*.db
+**/*.db-shm
+**/*.db-wal

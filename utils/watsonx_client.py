@@ -2,12 +2,16 @@
 utils/watsonx_client.py
 -----------------------
 Thin wrapper around ibm-watsonx-ai to call IBM Granite models.
-All credentials are loaded from environment variables (via .env).
+
+Credential resolution order (first non-empty value wins):
+  1. st.secrets  – Streamlit Community Cloud secret manager
+  2. os.environ  – local .env loaded via python-dotenv
 """
 
 import os
+import streamlit as st
 from dotenv import load_dotenv
-from ibm_watsonx_ai import APIClient, Credentials
+from ibm_watsonx_ai import Credentials
 from ibm_watsonx_ai.foundation_models import ModelInference
 from ibm_watsonx_ai.metanames import GenTextParamsMetaNames as GenParams
 
@@ -24,19 +28,28 @@ DEFAULT_PARAMS = {
 }
 
 
+def _secret(key: str, default: str = "") -> str:
+    """Read from st.secrets first, fall back to os.environ."""
+    try:
+        return st.secrets.get(key, os.getenv(key, default))
+    except Exception:
+        return os.getenv(key, default)
+
+
 def _get_credentials() -> Credentials:
-    api_key = os.getenv("WATSONX_API_KEY")
-    url = os.getenv("WATSONX_URL", "https://us-south.ml.cloud.ibm.com")
+    api_key = _secret("WATSONX_API_KEY")
+    url = _secret("WATSONX_URL", "https://us-south.ml.cloud.ibm.com")
     if not api_key:
         raise EnvironmentError(
-            "WATSONX_API_KEY is not set. Copy .env.example → .env and fill in your credentials."
+            "WATSONX_API_KEY is not set. "
+            "Add it to .streamlit/secrets.toml (local) or the Streamlit Cloud secrets dashboard."
         )
     return Credentials(url=url, api_key=api_key)
 
 
 def get_model(model_id: str = DEFAULT_MODEL, params: dict | None = None) -> ModelInference:
     """Return a ready-to-use ModelInference instance."""
-    project_id = os.getenv("WATSONX_PROJECT_ID")
+    project_id = _secret("WATSONX_PROJECT_ID")
     if not project_id:
         raise EnvironmentError("WATSONX_PROJECT_ID is not set.")
     return ModelInference(

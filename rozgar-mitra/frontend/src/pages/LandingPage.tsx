@@ -65,23 +65,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* RAG note */}
-      <section className="py-12 px-4 bg-gray-50">
-        <div className="max-w-2xl mx-auto text-center">
-          <div className="text-3xl mb-3">🧠</div>
-          <h2 className="text-xl font-bold text-gray-900 mb-3">
-            {hi ? 'AI + असली जानकारी = सटीक जवाब' : 'Agentic AI + Real Knowledge = Accurate Answers'}
-          </h2>
-          <p className="text-gray-600 text-sm leading-relaxed">
-            {hi
-              ? 'RozgarMitra AI पहले हमारे असली सरकारी डेटाबेस से जानकारी ढूंढता है, फिर IBM Granite मॉडल उसे आपकी भाषा में समझाता है।'
-              : 'RozgarMitra AI first retrieves relevant facts from our verified government knowledge base (RAG), then IBM Granite explains them clearly in your language. No hallucinations.'}
-          </p>
-          <Link to="/mentor" className="inline-flex items-center gap-2 btn-primary mt-6 text-sm px-6 py-3">
-            {hi ? 'अभी पूछें' : 'Ask Now'} <ArrowRight size={16} />
-          </Link>
-        </div>
-      </section>
     </div>
   );
 }

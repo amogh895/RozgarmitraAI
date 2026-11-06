@@ -18,7 +18,7 @@ from ibm_watsonx_ai.metanames import GenTextParamsMetaNames as GenParams
 load_dotenv()
 
 # ── Default model ────────────────────────────────────────────────────────────
-DEFAULT_MODEL = "ibm/granite-3-8b-instruct"
+DEFAULT_MODEL = "ibm/granite-4-h-small"
 
 # ── Shared parameters ────────────────────────────────────────────────────────
 DEFAULT_PARAMS = {

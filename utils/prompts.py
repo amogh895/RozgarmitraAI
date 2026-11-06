@@ -65,3 +65,38 @@ def job_match_prompt(profile: dict, job_listing: str) -> str:
         "2. Skill gaps (bullet list).\n"
         "3. Two things the candidate should highlight in their application."
     )
+
+
+def agent_prompt(profile: dict, history: list[dict], user_message: str) -> str:
+    """
+    Builds a full conversational prompt for the AI Agent page.
+    Includes the user's profile as context and the last few turns of history.
+    """
+    profile_ctx = ""
+    if profile:
+        skills = ", ".join(profile.get("skills", [])) or "not specified"
+        profile_ctx = (
+            f"User profile — Name: {profile.get('name', 'User')}, "
+            f"Role: {profile.get('current_role', 'not specified')}, "
+            f"Skills: {skills}, "
+            f"Experience: {profile.get('experience_years', '?')} years, "
+            f"Goal: {profile.get('career_goal', 'not specified')}.\n\n"
+        )
+
+    # Include up to last 6 turns for context window efficiency
+    recent = history[-6:] if len(history) > 6 else history
+    history_text = ""
+    for msg in recent:
+        role_label = "User" if msg["role"] == "user" else "Assistant"
+        history_text += f"{role_label}: {msg['content']}\n"
+
+    return (
+        "You are RozgarMitra AI, a helpful, friendly AI career agent.\n"
+        "You help users with career advice, job searching, resume tips, interview prep, "
+        "salary negotiation, skill development, and any other career or job-related questions.\n"
+        "Keep answers practical, encouraging, and concise (under 200 words unless detail is essential).\n\n"
+        f"{profile_ctx}"
+        f"{history_text}"
+        f"User: {user_message}\n"
+        "Assistant:"
+    )

@@ -18,6 +18,7 @@ st.sidebar.caption("Your AI-Powered Job & Career Mentor")
 st.sidebar.markdown("---")
 st.sidebar.info(
     "Use the **pages** above to navigate between features:\n\n"
+    "- 🤖 AI Agent\n"
     "- 👤 My Profile\n"
     "- 📄 Resume Review\n"
     "- 💼 Career Guidance\n"
@@ -40,6 +41,9 @@ st.markdown(
 st.divider()
 
 # ── Feature cards ─────────────────────────────────────────────────────────────
+st.markdown("#### 🤖 AI Agent")
+st.write("Chat freely with IBM Granite — ask any career question and get an instant, personalised response.")
+
 col1, col2 = st.columns(2)
 
 with col1:

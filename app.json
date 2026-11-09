@@ -1,0 +1,19 @@
+{
+  "name": "RozgarMitra AI",
+  "description": "An Agentic AI-Powered Career Mentor and Job-Fit Analysis System built with IBM Granite on IBM watsonx.ai and Langflow.",
+  "version": "1.0.0",
+  "author": "Amogh Dixit",
+  "domain": "Career Guidance & Employment / HR Tech / Workforce Development",
+  "repository": "https://github.com/amogh895/RozgarmitraAI",
+  "foundation_model": "ibm/granite-3-8b-instruct",
+  "platform": "IBM watsonx.ai & Langflow",
+  "frontend": "Streamlit",
+  "runtime": "Python 3.11+",
+  "features": [
+    "Dynamic Profile & Competency Management",
+    "Contextual Resume Review & ATS Optimization",
+    "Strictly Guardrailed Conversational Career Guidance",
+    "Role-Specific Behavioral (STAR) & Technical Interview Preparation",
+    "Semantic Job-Fit Scoring & Skill Gap Identification"
+  ]
+}

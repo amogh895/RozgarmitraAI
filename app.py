@@ -32,6 +32,7 @@ lang = lang_selector()
 st.sidebar.markdown("---")
 st.sidebar.info(t("nav_hint", lang))
 
+
 # ── Hero ──────────────────────────────────────────────────────────────────────
 st.markdown(
     f"""
@@ -122,13 +123,14 @@ col1, col2 = st.columns(2)
 with col1:
     st.markdown(t("feat_profile", lang))
     st.write(t("feat_profile_desc", lang))
+with col2:
     st.markdown(t("feat_resume", lang))
     st.write(t("feat_resume_desc", lang))
-with col2:
+
+col3, col4 = st.columns(2)
+with col3:
     st.markdown(t("feat_interview", lang))
     st.write(t("feat_interview_desc", lang))
-    st.markdown(t("feat_jobmatch", lang))
-    st.write(t("feat_jobmatch_desc", lang))
 
 st.divider()
 st.caption(t("built_with", lang))

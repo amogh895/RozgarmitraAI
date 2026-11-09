@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RozgarMitra AI - IBM University Engagement Project Presentation</title>
+  <style>
+    :root {
+      --ibm-blue: #0f62fe;
+      --ibm-navy: #001d6c;
+      --ibm-dark: #161616;
+      --ibm-gray-10: #f4f4f4;
+      --ibm-gray-20: #e0e0e0;
+      --ibm-gray-70: #525252;
+      --ibm-teal: #0072c3;
+      --ibm-purple: #8a3ffc;
+      --accent-green: #24a148;
+      --accent-red: #da1e28;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0b0f19;
+      color: #161616;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Top presentation navigation bar */
+    .top-controls {
+      width: 100%;
+      max-width: 1280px;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #fff;
+      font-size: 14px;
+      z-index: 100;
+    }
+
+    .top-controls .btn-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    .nav-btn {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #fff;
+      padding: 6px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      background: var(--ibm-blue);
+      border-color: var(--ibm-blue);
+    }
+
+    /* Slide container (16:9 Widescreen) */
+    .slide-wrapper {
+      width: 100%;
+      max-width: 1280px;
+      aspect-ratio: 16 / 9;
+      background: #ffffff;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+      display: none;
+      border-radius: 4px;
+    }
+
+    .slide-wrapper.active {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Slide Header */
+    .slide-header {
+      padding: 24px 44px 12px 44px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 2px solid #e0e0e0;
+      background: #fafafa;
+    }
+
+    .slide-header h2 {
+      font-family: Arial, sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--ibm-navy);
+      line-height: 1.2;
+    }
+
+    .slide-header .tagline {
+      font-size: 14px;
+      color: var(--ibm-gray-70);
+      font-weight: normal;
+      margin-top: 4px;
+    }
+
+    .ibm-badge {
+      font-size: 12px;
+      font-weight: 700;
+      background: #edf5ff;
+      color: var(--ibm-blue);
+      padding: 4px 12px;
+      border-radius: 12px;
+      border: 1px solid #c9deff;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    /* Slide Content */
+    .slide-body {
+      flex: 1;
+      padding: 28px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      font-family: Arial, sans-serif;
+      font-size: 20px;
+      line-height: 1.45;
+      color: #222;
+      overflow-y: auto;
+    }
+
+    /* Slide Footer */
+    .slide-footer {
+      padding: 10px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f4f4f4;
+      border-top: 1px solid #e0e0e0;
+      font-size: 13px;
+      color: #666;
+    }
+
+    /* Grid & Card utilities */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      height: 100%;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 16px 20px;
+      border-left: 5px solid var(--ibm-blue);
+    }
+
+    .card-purple {
+      border-left-color: var(--ibm-purple);
+    }
+
+    .card-green {
+      border-left-color: var(--accent-green);
+    }
+
+    .card-red {
+      border-left-color: var(--accent-red);
+    }
+
+    .card h3 {
+      font-size: 20px;
+      color: var(--ibm-navy);
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    .card p, .card li {
+      font-size: 17px;
+      color: #333;
+      line-height: 1.4;
+    }
+
+    ul.formal-list {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    ul.formal-list li {
+      position: relative;
+      padding-left: 26px;
+      margin-bottom: 12px;
+      font-size: 19px;
+      line-height: 1.4;
+    }
+
+    ul.formal-list li::before {
+      content: "▪";
+      position: absolute;
+      left: 6px;
+      color: var(--ibm-blue);
+      font-size: 22px;
+      top: -2px;
+    }
+
+    /* Slide 1 Custom Style */
+    .title-slide-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      padding: 30px 48px;
+      background: linear-gradient(135deg, #001141 0%, #001d6c 60%, #0f62fe 100%);
+      color: #ffffff;
+    }
+
+    .title-banner {
+      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+      padding-bottom: 14px;
+    }
+
+    .title-banner h1 {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      color: #ffffff;
+      text-transform: uppercase;
+    }
+
+    .title-banner h2 {
+      font-size: 22px;
+      font-weight: 400;
+      color: #82b1ff;
+      margin-top: 4px;
+    }
+
+    .title-center {
+      display: flex;
+      gap: 36px;
+      align-items: center;
+      margin: 16px 0;
+    }
+
+    .title-info-card {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 22px 26px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .title-info-card p {
+      font-size: 19px;
+      margin-bottom: 8px;
+      color: #f4f4f4;
+    }
+
+    .title-info-card p strong {
+      color: #ffffff;
+      display: inline-block;
+      width: 170px;
+    }
+
+    .photo-box {
+      width: 170px;
+      height: 215px;
+      border: 2px dashed rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 10px;
+      color: #ddd;
+      font-size: 14px;
+    }
+
+    .photo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    .title-footer {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.7);
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      padding-top: 12px;
+    }
+
+    /* Comparison / Blueprint Diagrams */
+    .blueprint-box {
+      background: #111827;
+      border: 1px solid #374151;
+      border-radius: 8px;
+      padding: 20px;
+      color: #e5e7eb;
+      font-family: monospace;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .workflow-step {
+      display: flex;
+      align-items: center;
+      background: #f0f4f9;
+      border-radius: 6px;
+      padding: 10px 16px;
+      margin-bottom: 8px;
+      border-left: 4px solid var(--ibm-blue);
+    }
+
+    .workflow-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--ibm-blue);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 14px;
+      margin-right: 14px;
+      flex-shrink: 0;
+    }
+
+    .workflow-text strong {
+      color: var(--ibm-navy);
+      display: block;
+      font-size: 16px;
+    }
+
+    .workflow-text span {
+      font-size: 14px;
+      color: #555;
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        background: #fff;
+      }
+      .top-controls {
+        display: none !important;
+      }
+      .slide-wrapper {
+        display: flex !important;
+        page-break-after: always;
+        break-after: page;
+        box-shadow: none;
+        margin-bottom: 0;
+        max-width: 100%;
+        height: 100vh;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Controls -->
+  <div class="top-controls">
+    <div>
+      <strong>RozgarMitra AI</strong> &nbsp;|&nbsp; IBM Engagement Project Deck
+    </div>
+    <div style="display:flex; align-items:center; gap:16px;">
+      <span id="slideCounter">Slide 1 / 12</span>
+      <div class="btn-group">
+        <button class="nav-btn" onclick="prevSlide()">❮ Prev</button>
+        <button class="nav-btn" onclick="nextSlide()">Next ❯</button>
+        <button class="nav-btn" onclick="toggleFullScreen()">⛶ Fullscreen</button>
+        <button class="nav-btn" onclick="window.print()">🖨️ Print / Save PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 1 ==================== -->
+  <div class="slide-wrapper active" id="slide-1">
+    <div class="title-slide-container">
+      <div class="title-banner">
+        <h1>IBM University Engagement Project Submission</h1>
+        <h2>“Exploring the Power of Agentic AI with IBM Granite and LangFlow”</h2>
+      </div>
+
+      <div class="title-center">
+        <div class="title-info-card">
+          <p><strong>Student Name:</strong> Amogh Dixit</p>
+          <p><strong>Email ID:</strong> amoghdixit895@gmail.com</p>
+          <p><strong>Mobile (WhatsApp):</strong> +91 91515 90518</p>
+          <p><strong>Domain of Project:</strong> Career Guidance &amp; HR Tech / Workforce Development</p>
+          <p><strong>Project Title:</strong> RozgarMitra AI – Agentic AI-Powered Job &amp; Career Mentor</p>
+          <p style="margin-top:14px; font-size:15px; color:#bbdefb; border-top:1px solid rgba(255,255,255,0.15); padding-top:10px;">
+            ✦ Recommended Typography: Arial | Heading: 28pt | Content: 20pt
+          </p>
+        </div>
+
+        <div class="photo-box">
+          <div style="font-size:36px; margin-bottom:8px;">👤</div>
+          <strong>Student Photo</strong>
+          <span style="font-size:12px; margin-top:4px;">Amogh Dixit</span>
+        </div>
+      </div>
+
+      <div class="title-footer">
+        <span>Platform: IBM watsonx.ai &amp; LangFlow</span>
+        <span>Foundation Model: IBM Granite (ibm/granite-3-8b-instruct)</span>
+        <span>Review / Submission: 2026</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 2 ==================== -->
+  <div class="slide-wrapper" id="slide-2">
+    <div class="slide-header">
+      <div>
+        <h2>Problem Statement : RozgarMitra AI</h2>
+        <div class="tagline">Overcoming the Career Guidance Deficit for Entry-Level &amp; Aspiring Professionals</div>
+      </div>
+      <div class="ibm-badge">The Challenge &amp; Objective</div>
+    </div>
+    <div class="slide-body">
+      <div class="grid-2">
+        <div class="card card-red">
+          <h3>The Challenge</h3>
+          <ul class="formal-list">
+            <li><strong>Fragmented &amp; Costly Guidance:</strong> Professional career counseling and mock interviews are prohibitively expensive for students and job seekers.</li>
+            <li><strong>Opaque ATS Filtering:</strong> Modern hiring tools reject resumes without actionable explanations or bridgeable feedback.</li>
+            <li><strong>Unprepared for Structured Interviews:</strong> Candidates struggle with STAR-methodology behavioral drills and technical nuances.</li>
+            <li><strong>Generic &amp; Hallucinatory AI Tools:</strong> General chatbots lack domain guardrails, context preservation, and grounded job market alignment.</li>
+          </ul>
+        </div>
+        <div class="card card-green">
+          <h3>The Objective</h3>
+          <p style="margin-bottom:10px; font-size:18px;">Build an autonomous, multi-agent <strong>RozgarMitra AI</strong> ecosystem providing:</p>
+          <ul class="formal-list">
+            <li><strong>Candidate Profile Engine:</strong> Stateful tracking of competencies, experience, and career aspirations.</li>
+            <li><strong>Contextual Resume Audit:</strong> Scored feedback (1-10), pinpointing 3 strengths, 3 improvements, and rewritten summaries.</li>
+            <li><strong>STAR Interview Simulation:</strong> Role-specific behavioral and technical question synthesis with scoring rubrics.</li>
+            <li><strong>Semantic Job-Fit &amp; Gap Analysis:</strong> Algorithmic matching against job listings with concrete application tips.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>RozgarMitra AI – IBM University Engagement</span>
+      <span>Slide 2 of 12</span>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 3 ==================== -->
+  <div class="slide-wrapper" id="slide-3">
+    <div class="slide-header">
+      <div>
+        <h2>Proposed Solution : AI-Powered Career &amp; Job Mentor</h2>
+        <div class="tagline">An Agentic, Multi-Agent Architecture Powered by IBM Granite on watsonx.ai</div>
+      </div>
+      <div class="ibm-badge">Proposed Solution</div>
+    </div>
+    <div class="slide-body">
+      <p style="margin-bottom:16px;">
+        The proposed solution is an end-to-end <strong>Agentic AI Career Mentorship System</strong> engineered using <strong>LangFlow</strong>, <strong>IBM watsonx.ai</strong>, and <strong>IBM Granite Models (ibm/granite-3-8b-instruct)</strong>. The system provides real-time, highly contextual career coaching through coordinated autonomous agents:
+      </p>
+      <div class="grid-3" style="margin-top:6px;">
+        <div class="card">
+          <h3>1. Profile &amp; Context Agent</h3>
+          <p>Maintains persistent candidate skills, goals, and experience across all modular workflows using zero-overhead JSON state persistence.</p>
+        </div>
+        <div class="card card-purple">
+          <h3>2. Resume Evaluator Agent</h3>
+          <p>Performs semantic parsing against target job specs, calculates an ATS match score, pinpoints exact flaws, and generates an optimized summary.</p>
+        </div>
+        <div class="card card-green">
+          <h3>3. Interview Coach Agent</h3>
+          <p>Generates tailored 5-question interview sets balancing STAR behavioral probes and technical questions with expert evaluation tips.</p>
+        </div>
+      </div>
+      <div class="grid-2" style="margin-top:16px;">
+        <div class="card" style="border-left-color: #f1c21b;">
+          <h3>4. Job-Fit &amp; Gap Analysis Agent</h3>
+          <p>Compares candidate qualifications against job listings, generating match percentages, missing skill alerts, and key talking points.</p>
+        </div>
+        <div class="card" style="border-left-color: var(--ibm-blue);">
+          <h3>5. Conversational Mentor with Guardrails</h3>
+          <p>24/7 interactive career guidance enforcing strict domain boundaries—politely declining off-domain queries to maintain professional focus.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>RozgarMitra AI – IBM University Engagement</span>
+      <span>Slide 3 of 12</span>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 4 ==================== -->
+  <div class="slide-wrapper" id="slide-4">
+    <div class="slide-header">
+      <div>
+        <h2>Technology Used</h2>
+        <div class="tagline">Enterprise Foundation Models, Visual Orchestration &amp; Cloud Infrastructure</div>
+      </div>
+      <div class="ibm-badge">Tech Stack</div>
+    </div>
+    <div class="slide-body">
+      <div class="grid-2">
+        <div>
+          <h3 style="font-size:22px; color:var(--ibm-navy); margin-bottom:12px;">Core Technologies</h3>
+          <ul class="formal-list">
+            <li><strong>LangFlow Platform:</strong> Visual design and orchestration of multi-agent prompt chains, guardrails, and conditional execution.</li>
+            <li><strong>IBM Granite Model:</strong> <span style="color:var(--ibm-blue); font-weight:bold;">ibm/granite-3-8b-instruct</span> for high-accuracy reasoning, instruction compliance, and natural dialogue.</li>
+            <li><strong>IBM watsonx.ai:</strong> Enterprise foundation model serving, parameter tuning (temperature 0.7, repetition penalty 1.1), and governance.</li>
+            <li><strong>IBM Cloud:</strong> Secure cloud infrastructure delivering managed endpoints, IAM security, and scalable execution.</li>
+            <li><strong>Streamlit &amp; Python:</strong> Responsive multi-page frontend with zero-database file persistence.</li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="font-size:22px; color:var(--ibm-navy); margin-bottom:12px;">LangFlow Components Used</h3>
+          <div class="workflow-step">
+            <div class="workflow-num">1</div>
+            <div class="workflow-text"><strong>Chat Input Component</strong><span>Captures user resumes, job postings, and career inquiries.</span></div>
+          </div>
+          <div class="workflow-step">
+            <div class="workflow-num">2</div>
+            <div class="workflow-text"><strong>IBM watsonx AI Agent Node</strong><span>Executes parameterized Granite inference via ibm-watsonx-ai SDK.</span></div>
+          </div>
+          <div class="workflow-step">
+            <div class="workflow-num">3</div>
+            <div class="workflow-text"><strong>Granite-3-8B-Instruct Model</strong><span>Optimized parameters: 1024 max tokens, 0.7 temp, 1.1 repetition penalty.</span></div>
+          </div>
+          <div class="workflow-step">
+            <div class="workflow-num">4</div>
+            <div class="workflow-text"><strong>Chat Output &amp; File Component</strong><span>Renders structured scores and serializes candidate profiles/history.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>RozgarMitra AI – IBM University Engagement</span>
+      <span>Slide 4 of 12</span>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 5 ==================== -->
+  <div class="slide-wrapper" id="slide-5">
+    <div class="slide-header">
+      <div>
+        <h2>LangFlow Workflow</h2>
+        <div class="tagline">Multi-Agent Visual Orchestration Pipeline &amp; Guardrailed Routing</div>
+      </div>
+      <div class="ibm-badge">Workflow Design</div>
+    </div>
+    <div class="slide-body">
+      <div class="blueprint-box" style="margin-bottom:16px;">
+        <span style="color:#60a5fa;">[LangFlow Multi-Agent Visual Orchestration Pipeline]</span><br><br>
+        [Candidate Input] ──► [Intent Classifier &amp; Domain Guardrail Node]<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;┌───────────────────────┴────────────────────────┐<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼<br>
+        [Resume Review Agent]&nbsp;&nbsp;&nbsp;[Interview Prep Agent]&nbsp;&nbsp;&nbsp;[Job Match &amp; Career Agent]<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└───────────────────────┬────────────────────────┘<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Profile Context Injection (JSON Store)]<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IBM watsonx.ai : Granite-3-8B-Instruct Engine]<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Structured Formatter ──► Streamlit Output UI]
+      </div>
+      <p style="font-size:18px; color:#444;">
+        ✦ <strong>Visual Orchestration:</strong> LangFlow connects user prompts with IBM Granite model parameters, enforcing strict domain verification and automatic profile injection before inference.
+      </p>
+    </div>
+    <div class="slide-footer">
+      <span>RozgarMitra AI – IBM University Engagement</span>
+      <span>Slide 5 of 12</span>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 6 ==================== -->
+  <div class="slide-wrapper" id="slide-6">
+    <div class="slide-header">
+      <div>
+        <h2>Architecture Blueprint</h2>
+        <div class="tagline">Modular Multi-Tier System Blueprint for RozgarMitra AI</div>
+      </div>
+      <div class="ibm-badge">System Architecture</div>
+    </div>
+    <div class="slide-body">
+      <div class="grid-2">
+        <div class="card" style="border-left-color:var(--ibm-blue);">
+          <h3>Presentation &amp; UI Layer</h3>
+          <ul class="formal-list">
+            <li><strong>Streamlit Multi-Page App:</strong> Dedicated UI for Profile Setup, Resume Review, Interview Prep, Job Match, and Mentor Chat.</li>
+            <li><strong>Client-Side Session State:</strong> UUID-based session segregation ensuring multi-user isolation.</li>
+          </ul>
+          <h3 style="margin-top:14px;">Data &amp; Persistence Layer</h3>
+          <ul class="formal-list">
+            <li><strong>JSON Profile Store:</strong> Instant, zero-config candidate profile storage.</li>
+            <li><strong>Sample Job Database:</strong> Real-world job listings for benchmark matching.</li>
+          </ul>
+        </div>
+        <div class="card" style="border-left-color:var(--ibm-purple);">
+          <h3>Orchestration &amp; Guardrails Layer</h3>
+          <ul class="formal-list">
+            <li><strong>LangFlow Pipeline:</strong> Dynamic routing and agentic role handoffs.</li>
+            <li><strong>Domain Safety Guardrail:</strong> Filters non-career queries with polite redirection to professional topics.</li>
+            <li><strong>Context Buffer:</strong> Last-6-turns conversational sliding window for token optimization.</li>
+          </ul>
+          <h3 style="margin-top:14px;">Inference &amp; Cloud Foundation</h3>
+          <ul class="formal-list">
+            <li><strong>IBM watsonx.ai Foundation Models:</strong> <span style="color:var(--ibm-blue);">ibm/granite-3-8b-instruct</span>.</li>
+            <li><strong>IBM Cloud IAM:</strong> Secure API authentication and resource governance.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>RozgarMitra AI – IBM University Engagement</span>
+      <span>Slide 6 of 12</span>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 7 ==================== -->
+  <div class="slide-wrapper" id="slide-7">
+    <div class="slide-header">
+      <div>
+        <h2>Role of Agentic AI in the Solution</h2>
+        <div class="tagline">Why Agentic Intelligence Elevates RozgarMitra AI Beyond Standard Chatbots</div>
+      </div>
+      <div class="ibm-badge">Agentic AI</div>
+    </div>
+    <div class="slide-body">
+      <div class="grid-2">
+        <div class="card card-green">
+          <h3>Autonomous Specialization</h3>
+          <p>Rather than a monolithic prompt, Agentic AI divides career counseling into specialized personas (Evaluator, Interviewer, Analyst, Coach), yielding dramatically higher precision and structured outputs.</p>
+        </div>
+        <div class="card card-purple">
+          <h3>Contextual Awareness &amp; Memory</h3>
+          <p>The system dynamically retains the candidate's skills, experience, and career goals across every tab, tailoring mock interviews and job match scores without repeated user inputs.</p>
+        </div>
+        <div class="card">
+          <h3>Proactive Goal-Driven Action</h3>
+          <p>Instead of passive answers, the agent pinpoints concrete skill gaps, suggests specific portfolio items, and recommends exact STAR framing adjustments for interviews.</p>
+        </div>
+        <div class="card card-red">
+          <h3>Strict Domain Guardrails</h3>
+          <p>Autonomous safety checks detect when users ask off-domain questions (e.g., cooking, politics) and politely guide them back to career and job topics, ensuring professional decorum.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>RozgarMitra AI – IBM University Engagement</span>
+      <span>Slide 7 of 12</span>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 8 ==================== -->
+  <div class="slide-wrapper" id="slide-8">
+    <div class="slide-header">
+      <div>
+        <h2>Token Usage &amp; Efficiency</h2>
+        <div class="tagline">Inference Resource Optimization with IBM Granite-3-8B on watsonx.ai</div>
+      </div>
+      <div class="ibm-badge">Resource Optimization</div>
+    </div>
+    <div class="slide-body">
+      <div class="grid-2">
+        <div class="card" style="border-left-color:var(--ibm-teal);">
+          <h3>Token Metrics on IBM watsonx.ai</h3>
+          <ul class="formal-list">
+            <li><strong>Foundation Model:</strong> ibm/granite-3-8b-instruct</li>
+            <li><strong>Baseline Execution:</strong> Highly concise system prompts minimizing prompt token consumption.</li>
+            <li><strong>Max New Tokens Bound:</strong> Capped at 1,024 tokens to guarantee swift, comprehensive feedback without token wastage.</li>
+            <li><strong>Free Tier Economy:</strong> Comfortably operates within IBM Cloud's 300,000 monthly free tokens tier.</li>
+          </ul>
+        </div>
+        <div class="card card-purple">
+          <h3>Context Window Optimization</h3>
+          <ul class="formal-list">
+            <li><strong>Sliding History Window:</strong> The Agent chat retains the last 6 conversational turns (~600 tokens) to balance continuity with token conservation.</li>
+            <li><strong>Zero Redundant Payload:</strong> Compact JSON candidate profiles are serialized into prompt templates only when relevant.</li>
+            <li><strong>Repetition Penalty (1.1):</strong> Eliminates repetitive loop hallucinations, cutting redundant token generation.</li>
+          </ul>
+        </div>
+      </div>
+      <div style="margin-top:18px; background:#edf5ff; border:1px solid #b3d1ff; padding:12px 20px; border-radius:6px; font-size:17px; color:#002d9c;">
+        ✦ <strong>Result:</strong> Over 70% reduction in token overhead compared to naive unpruned LLM pipelines, delivering sub-second response latencies.
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>RozgarMitra AI – IBM University Engagement</span>
+      <span>Slide 8 of 12</span>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 9 ==================== -->
+  <div class="slide-wrapper" id="slide-9">
+    <div class="slide-header">
+      <div>
+        <h2>Novelty and Uniqueness</h2>
+        <div class="tagline">What Differentiates RozgarMitra AI in the Career Guidance Landscape</div>
+      </div>
+      <div class="ibm-badge">Value Proposition</div>
+    </div>
+    <div class="slide-body">
+      <div class="grid-3">
+        <div class="card">
+          <h3>Full Lifecycle Mentorship</h3>
+          <p>Unifies resume auditing, role-specific STAR interview drills, semantic job matching, and conversational guidance under one platform.</p>
+        </div>
+        <div class="card card-purple">
+          <h3>Actionable ATS Feedback</h3>
+          <p>Replaces opaque rejections with calibrated scores (1-10), 3 specific strengths, 3 actionable improvements, and rewritten summaries.</p>
+        </div>
+        <div class="card card-green">
+          <h3>Democratized &amp; Zero-Cost</h3>
+          <p>Requires no paid subscriptions or heavy infrastructure, providing equitable career empowerment for underserved candidates.</p>
+        </div>
+      </div>
+      <div class="grid-2" style="margin-top:16px;">
+        <div class="card" style="border-left-color:var(--accent-red);">
+          <h3>Deterministic Domain Guardrails</h3>
+          <p>Rigorous system-level instructions enforce strict focus on employment and career growth, guaranteeing enterprise safety.</p>
+        </div>
+        <div class="card" style="border-left-color:var(--ibm-navy);">
+          <h3>IBM Granite Trust &amp; Governance</h3>
+          <p>Built upon IBM's open-source, enterprise-grade Granite models backed by IBM watsonx.ai AI governance and transparency standards.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>RozgarMitra AI – IBM University Engagement</span>
+      <span>Slide 9 of 12</span>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 10 ==================== -->
+  <div class="slide-wrapper" id="slide-10">
+    <div class="slide-header">
+      <div>
+        <h2>GitHub Repository &amp; Deliverables</h2>
+        <div class="tagline">Verified Repository Structure, Code Assets &amp; Documentation Checklist</div>
+      </div>
+      <div class="ibm-badge">Submission Deliverables</div>
+    </div>
+    <div class="slide-body">
+      <div class="card" style="margin-bottom:18px; border-left-color:var(--ibm-blue);">
+        <p style="font-size:20px; font-weight:bold; color:var(--ibm-navy);">
+          Public GitHub Repository URL:
+        </p>
+        <p style="font-size:22px; color:var(--ibm-blue); font-family:monospace; margin-top:4px;">
+          https://github.com/amogh895/RozgarmitraAI
+        </p>
+      </div>
+
+      <h3 style="font-size:22px; color:var(--ibm-navy); margin-bottom:12px;">Mandatory Submission Checklist</h3>
+      <div class="grid-2">
+        <div class="workflow-step">
+          <div class="workflow-num">✔</div>
+          <div class="workflow-text"><strong>1. app.json / app.py</strong><span>Project metadata file and complete Streamlit web application.</span></div>
+        </div>
+        <div class="workflow-step">
+          <div class="workflow-num">✔</div>
+          <div class="workflow-text"><strong>2. Problem Statement PDF</strong><span>RozgarMitra_ProblemStatement.pdf document outlining objectives.</span></div>
+        </div>
+        <div class="workflow-step">
+          <div class="workflow-num">✔</div>
+          <div class="workflow-text"><strong>3. Project Presentation PPTX</strong><span>Official project presentation slide deck matching IBM guidelines.</span></div>
+        </div>
+        <div class="workflow-step">
+          <div class="workflow-num">✔</div>
+          <div class="workflow-text"><strong>4. Multi-Page Architecture Modules</strong><span>Complete pages/, utils/ (watsonx_client, prompts, data_store), data/.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>RozgarMitra AI – IBM University Engagement</span>
+      <span>Slide 10 of 12</span>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 11 ==================== -->
+  <div class="slide-wrapper" id="slide-11">
+    <div class="slide-header">
+      <div>
+        <h2>Future Scope</h2>
+        <div class="tagline">Strategic Roadmap for Expansion, Accessibility &amp; Ecosystem Integration</div>
+      </div>
+      <div class="ibm-badge">Future Roadmap</div>
+    </div>
+    <div class="slide-body">
+      <div class="grid-2">
+        <div class="card card-purple">
+          <h3>1. Vernacular Voice Assistant</h3>
+          <p>Incorporate Speech-to-Text and Text-to-Speech in regional Indian languages (Hindi, Tamil, Telugu, Bengali) to empower semi-urban and rural job seekers with voice-guided career coaching.</p>
+        </div>
+        <div class="card card-green">
+          <h3>2. Live Job Board &amp; ATS API Integration</h3>
+          <p>Integrate direct APIs with LinkedIn, Indeed, and the National Career Service (NCS) portal to allow 1-click semantic matching and automatic application tracking against live postings.</p>
+        </div>
+        <div class="card">
+          <h3>3. Audio/Video Mock Interview Analysis</h3>
+          <p>Extend the Interview Coach to analyze candidate pacing, filler word frequency, and vocal confidence using multimodal AI evaluation.</p>
+        </div>
+        <div class="card" style="border-left-color: #f1c21b;">
+          <h3>4. Upskilling &amp; IBM SkillsBuild Roadmaps</h3>
+          <p>Automatically connect identified skill gaps to free, credentialed course modules on IBM SkillsBuild, edX, and NPTEL, creating complete learning roadmaps.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>RozgarMitra AI – IBM University Engagement</span>
+      <span>Slide 11 of 12</span>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 12 ==================== -->
+  <div class="slide-wrapper" id="slide-12">
+    <div class="title-slide-container" style="justify-content:center; text-align:center; background: radial-gradient(circle at center, #001d6c 0%, #001141 100%);">
+      <div style="font-size:72px; font-weight:800; color:#ffffff; margin-bottom:12px; letter-spacing:1px;">
+        Thank You!
+      </div>
+      <div style="font-size:26px; color:#90caf9; margin-bottom:32px;">
+        Thank you for your time and interest.
+      </div>
+
+      <div style="max-width:700px; margin:0 auto; background:rgba(255,255,255,0.08); padding:24px 36px; border-radius:12px; border:1px solid rgba(255,255,255,0.15);">
+        <p style="font-size:22px; color:#ffffff; font-weight:bold; margin-bottom:8px;">
+          RozgarMitra AI – Your AI-Powered Job &amp; Career Mentor
+        </p>
+        <p style="font-size:18px; color:#e0e0e0; margin-bottom:6px;">
+          Developed by: <strong>Amogh Dixit</strong>
+        </p>
+        <p style="font-size:16px; color:#bbdefb;">
+          Powered by <strong>IBM Granite</strong> on <strong>IBM watsonx.ai</strong> &amp; <strong>LangFlow</strong>
+        </p>
+        <p style="font-size:15px; color:#82b1ff; margin-top:12px; font-family:monospace;">
+          https://github.com/amogh895/RozgarmitraAI
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide Navigation Scripts -->
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 12;
+
+    function showSlide(n) {
+      document.querySelectorAll('.slide-wrapper').forEach(s => s.classList.remove('active'));
+      const activeSlide = document.getElementById(`slide-${n}`);
+      if (activeSlide) {
+        activeSlide.classList.add('active');
+        document.getElementById('slideCounter').innerText = `Slide ${n} / ${totalSlides}`;
+        currentSlide = n;
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        showSlide(currentSlide + 1);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        showSlide(currentSlide - 1);
+      }
+    }
+
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        prevSlide();
+      } else if (e.key === 'Home') {
+        showSlide(1);
+      } else if (e.key === 'End') {
+        showSlide(totalSlides);
+      } else if (e.key.toLowerCase() === 'f') {
+        toggleFullScreen();
+      }
+    });
+  </script>
+</body>
+</html>

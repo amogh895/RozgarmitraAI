@@ -21,10 +21,10 @@ STRINGS = {
     # ── Sidebar nav ──────────────────────────────────────────────────────────
     "nav_hint":         {"en": "Use the **pages** above to navigate:\n\n"
                                "- 🤖 AI Job Mentor\n- 👤 My Profile\n- 📄 Resume Review\n"
-                               "- 💼 Career Guidance\n- 🎤 Interview Prep\n- 🔍 Job Match",
+                               "- 🎤 Interview Prep",
                          "hi": "ऊपर दिए **pages** पर जाएं:\n\n"
                                "- 🤖 AI जॉब मेंटर\n- 👤 मेरी प्रोफ़ाइल\n- 📄 रिज्यूमे समीक्षा\n"
-                               "- 💼 करियर मार्गदर्शन\n- 🎤 इंटरव्यू तैयारी\n- 🔍 जॉब मिलान"},
+                               "- 🎤 इंटरव्यू तैयारी"},
 
     # ── AI Agent page ─────────────────────────────────────────────────────────
     "agent_page_title": {"en": "🤖 RozgarMitra AI Job Mentor",

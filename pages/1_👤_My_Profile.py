@@ -1,43 +1,43 @@
 """
 pages/1_👤_My_Profile.py
-Collect and persist the user's career profile.
+Collect and persist the user's career profile — multilingual.
 """
 
 import uuid
 import streamlit as st
 from utils.data_store import save_profile, load_profile
+from utils.i18n import t, lang_selector
 
 st.set_page_config(page_title="My Profile – RozgarMitra AI", page_icon="👤", layout="centered")
 
-# ── Session ID (persisted across reruns via session_state) ───────────────────
 if "session_id" not in st.session_state:
     st.session_state["session_id"] = str(uuid.uuid4())
 session_id = st.session_state["session_id"]
 
-# ── Load existing profile ────────────────────────────────────────────────────
+lang = lang_selector()
 existing = load_profile(session_id)
 
-st.title("👤 My Profile")
-st.caption("Your profile is used by all other features to personalise AI responses.")
+st.title(t("profile_title", lang))
+st.caption(t("profile_caption", lang))
 
 with st.form("profile_form"):
-    name = st.text_input("Full Name", value=existing.get("name", ""))
-    current_role = st.text_input("Current Role / Title", value=existing.get("current_role", ""))
+    name = st.text_input(t("profile_name", lang), value=existing.get("name", ""))
+    current_role = st.text_input(t("profile_role", lang), value=existing.get("current_role", ""))
     experience_years = st.number_input(
-        "Years of Experience", min_value=0, max_value=50,
+        t("profile_exp", lang), min_value=0, max_value=50,
         value=int(existing.get("experience_years", 0)),
     )
     skills_raw = st.text_area(
-        "Skills (comma-separated)",
+        t("profile_skills", lang),
         value=", ".join(existing.get("skills", [])),
-        placeholder="e.g. Python, SQL, Machine Learning, Communication",
+        placeholder=t("profile_skills_ph", lang),
     )
     career_goal = st.text_area(
-        "Career Goal",
+        t("profile_goal", lang),
         value=existing.get("career_goal", ""),
-        placeholder="e.g. Become a Senior Data Scientist in 2 years.",
+        placeholder=t("profile_goal_ph", lang),
     )
-    submitted = st.form_submit_button("💾 Save Profile")
+    submitted = st.form_submit_button(t("profile_save", lang))
 
 if submitted:
     skills = [s.strip() for s in skills_raw.split(",") if s.strip()]
@@ -50,11 +50,10 @@ if submitted:
     }
     save_profile(session_id, profile)
     st.session_state["profile"] = profile
-    st.success("Profile saved! ✅ You can now use all features.")
+    st.success(t("profile_saved_ok", lang))
 
-# ── Show saved profile ────────────────────────────────────────────────────────
 saved = load_profile(session_id)
 if saved:
     st.divider()
-    st.subheader("Saved Profile")
+    st.subheader(t("profile_view", lang))
     st.json(saved)

@@ -67,10 +67,10 @@ def job_match_prompt(profile: dict, job_listing: str) -> str:
     )
 
 
-def agent_prompt(profile: dict, history: list[dict], user_message: str) -> str:
+def agent_prompt(profile: dict, history: list[dict], user_message: str, lang: str = "en") -> str:
     """
     Builds a full conversational prompt for the AI Agent page.
-    Includes the user's profile as context and the last few turns of history.
+    Includes profile context, conversation history, guardrails, and language instruction.
     """
     profile_ctx = ""
     if profile:
@@ -90,11 +90,36 @@ def agent_prompt(profile: dict, history: list[dict], user_message: str) -> str:
         role_label = "User" if msg["role"] == "user" else "Assistant"
         history_text += f"{role_label}: {msg['content']}\n"
 
+    lang_instruction = (
+        "IMPORTANT: The user has chosen Hindi as their language. "
+        "Always respond in simple, easy-to-understand Hindi (Devanagari script). "
+        "Use simple words that an informal or daily-wage worker can understand easily.\n"
+        if lang == "hi" else
+        "Respond in clear, simple English that is easy for any worker to understand.\n"
+    )
+
+    informal_worker_ctx = (
+        "CONTEXT: Many users of this app are informal workers, daily-wage earners, "
+        "blue-collar workers, migrants, or first-generation job seekers in India. "
+        "Tailor advice to be practical, affordable, and relevant to the Indian job market. "
+        "When relevant, mention government schemes like PM Kaushal Vikas Yojana, "
+        "NCS portal, e-Shram, PMEGP, Rozgar Mela, MGNREGS, or ITI training programmes.\n\n"
+    )
+
     return (
-        "You are RozgarMitra AI, a helpful, friendly AI career agent.\n"
-        "You help users with career advice, job searching, resume tips, interview prep, "
-        "salary negotiation, skill development, and any other career or job-related questions.\n"
-        "Keep answers practical, encouraging, and concise (under 200 words unless detail is essential).\n\n"
+        "You are RozgarMitra AI Job Mentor, a helpful and friendly AI career assistant for Indian workers.\n"
+        "Your ONLY domain is: jobs, careers, resumes, cover letters, interview preparation, "
+        "salary negotiation, skill development, career transitions, job searching, and professional growth.\n"
+        f"{lang_instruction}"
+        "STRICT RULES — you must follow these without exception:\n"
+        "1. If the user asks about anything outside the career/job domain (e.g. cooking, politics, "
+        "   health, religion, relationships, coding help unrelated to career, general knowledge), "
+        "   politely decline and redirect: say you can only help with job and career topics.\n"
+        "2. Never provide legal, financial, medical, or personal life advice.\n"
+        "3. Never generate harmful, offensive, or inappropriate content.\n"
+        "4. Always be encouraging, practical, and concise (under 200 words unless detail is essential).\n"
+        "5. If unsure whether a topic is career-related, err on the side of helping.\n\n"
+        f"{informal_worker_ctx}"
         f"{profile_ctx}"
         f"{history_text}"
         f"User: {user_message}\n"

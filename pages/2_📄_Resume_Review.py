@@ -1,41 +1,44 @@
 """
 pages/2_📄_Resume_Review.py
-Paste a resume, optionally add a job description, get IBM Granite feedback.
+Resume review with IBM Granite — multilingual.
 """
 
 import streamlit as st
 from utils.watsonx_client import generate
 from utils.prompts import resume_review_prompt
+from utils.i18n import t, lang_selector
 
 st.set_page_config(page_title="Resume Review – RozgarMitra AI", page_icon="📄", layout="centered")
 
-st.title("📄 Resume Review")
-st.caption("Paste your resume below. IBM Granite will score it and suggest improvements.")
+lang = lang_selector()
+
+st.title(t("resume_title", lang))
+st.caption(t("resume_caption", lang))
 
 resume_text = st.text_area(
-    "Your Resume",
+    t("resume_input_label", lang),
     height=300,
-    placeholder="Paste the full text of your resume here…",
+    placeholder=t("resume_input_ph", lang),
 )
 
 job_description = st.text_area(
-    "Target Job Description (optional)",
+    t("resume_jd_label", lang),
     height=120,
-    placeholder="Paste the job description to get tailored feedback…",
+    placeholder=t("resume_jd_ph", lang),
 )
 
-if st.button("🔍 Review My Resume", type="primary"):
+if st.button(t("resume_btn", lang), type="primary"):
     if not resume_text.strip():
-        st.warning("Please paste your resume text first.")
+        st.warning(t("resume_warn", lang))
     else:
-        with st.spinner("IBM Granite is reviewing your resume…"):
+        with st.spinner(t("resume_spinner", lang)):
             try:
                 prompt = resume_review_prompt(resume_text, job_description)
                 result = generate(prompt)
                 st.divider()
-                st.subheader("AI Feedback")
+                st.subheader(t("resume_result_hdr", lang))
                 st.markdown(result)
             except EnvironmentError as e:
-                st.error(f"Configuration error: {e}")
+                st.error(f"{t('config_error', lang)}{e}")
             except Exception as e:
-                st.error(f"Something went wrong: {e}")
+                st.error(f"{t('generic_error', lang)}{e}")

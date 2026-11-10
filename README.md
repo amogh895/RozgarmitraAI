@@ -4,6 +4,14 @@ A Streamlit web application that delivers personalised career mentoring, resume 
 
 ---
 
+## Deployment Details 
+
+Platform: Streamlit Community Cloud (Free Tier)
+Deployment URL: https://rozgarmitra-ai.streamlit.app
+                 Or
+Click here : [ProjectDemo](https://rozgarmitra-ai.streamlit.app)
+
+
 ## Features
 
 | Page | Description |
@@ -126,13 +134,6 @@ rozgarMitra-ai/
 This app uses `ibm/granite-3-8b-instruct`, IBM's open-source instruction-following model available on the IBM Lite plan with **300,000 free inference tokens per month**.
 
 ---
-
-## Deployment Details 
-
-Platform: Streamlit Community Cloud (Free Tier)
-Deployment URL: https://rozgarmitra-ai.streamlit.app
-                 Or
-Click here : [ProjectDemo](https://rozgarmitra-ai.streamlit.app)
 
 ## License
 

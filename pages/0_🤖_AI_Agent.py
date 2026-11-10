@@ -37,11 +37,19 @@ with st.sidebar:
 # Header
 st.markdown(
     f"""
-    <div style="text-align:center; padding:1.2rem 0 0.4rem 0;">
-        <h2 style="font-size:1.9rem; font-weight:800; color:#1a1a2e; margin-bottom:0.2rem;">
-            {t("agent_page_title", lang)}
+    <div style="
+        background: linear-gradient(135deg, #1a56db 0%, #0f3460 60%, #16213e 100%);
+        border-radius: 14px;
+        padding: 1.4rem 1rem 1.2rem 1rem;
+        text-align: center;
+        margin-bottom: 0.6rem;
+        box-shadow: 0 4px 18px rgba(26,86,219,0.16);
+    ">
+        <div style="font-size:2.4rem; margin-bottom:0.2rem;">🤖</div>
+        <h2 style="font-size:1.8rem; font-weight:900; color:#ffffff; margin:0 0 0.25rem 0;">
+            RozgarMitra AI Job Mentor
         </h2>
-        <p style="color:#555; font-size:1rem; margin:0;">{t("agent_subtitle", lang)}</p>
+        <p style="color:#c7d8ff; font-size:0.95rem; margin:0;">{t("agent_subtitle", lang)}</p>
     </div>
     """,
     unsafe_allow_html=True,

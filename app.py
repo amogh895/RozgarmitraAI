@@ -36,14 +36,29 @@ st.sidebar.info(t("nav_hint", lang))
 # ── Hero ──────────────────────────────────────────────────────────────────────
 st.markdown(
     f"""
-    <div style="text-align:center; padding:1.5rem 0 0.5rem 0;">
-        <h1 style="font-size:2.4rem; font-weight:800; color:#1a1a2e; margin-bottom:0.3rem;">
-            {t("app_title", lang)}
+    <div style="
+        background: linear-gradient(135deg, #1a56db 0%, #0f3460 60%, #16213e 100%);
+        border-radius: 16px;
+        padding: 2.2rem 1rem 1.8rem 1rem;
+        text-align: center;
+        margin-bottom: 0.5rem;
+        box-shadow: 0 4px 24px rgba(26,86,219,0.18);
+    ">
+        <div style="font-size:3.2rem; margin-bottom:0.4rem;">🎯</div>
+        <h1 style="font-size:2.4rem; font-weight:900; color:#ffffff; margin:0 0 0.3rem 0; letter-spacing:-0.5px;">
+            RozgarMitra AI
         </h1>
-        <p style="font-size:1.1rem; color:#555; margin:0;">{t("app_tagline", lang)}</p>
-        <p style="font-size:0.9rem; color:#888; margin-top:0.3rem;">
-            {t("powered_by", lang)}
+        <p style="font-size:1.1rem; color:#c7d8ff; margin:0 0 0.5rem 0; font-weight:500;">
+            {t("app_tagline", lang)}
         </p>
+        <span style="
+            display:inline-block;
+            background:rgba(255,255,255,0.15);
+            border-radius:20px;
+            padding:0.25rem 1rem;
+            font-size:0.8rem;
+            color:#e0eaff;
+        ">⚡ {t("powered_by", lang)}</span>
     </div>
     """,
     unsafe_allow_html=True,

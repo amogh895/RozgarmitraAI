@@ -95,9 +95,8 @@ rozgarMitra-ai/
 ├── pages/
 │   ├── 1_👤_My_Profile.py
 │   ├── 2_📄_Resume_Review.py
-│   ├── 3_💼_Career_Guidance.py
-│   ├── 4_🎤_Interview_Prep.py
-│   └── 5_🔍_Job_Match.py
+│   ├── 3_🎤_Interview_Prep.py
+
 ├── utils/
 │   ├── watsonx_client.py    # IBM Granite inference wrapper
 │   ├── prompts.py           # Prompt templates for each feature
@@ -127,6 +126,13 @@ rozgarMitra-ai/
 This app uses `ibm/granite-3-8b-instruct`, IBM's open-source instruction-following model available on the IBM Lite plan with **300,000 free inference tokens per month**.
 
 ---
+
+## Deployment Details 
+
+Platform: Streamlit Community Cloud (Free Tier)
+Deployment URL: https://rozgarmitra-ai.streamlit.app
+                 Or
+Click here : [ProjectDemo](https://rozgarmitra-ai.streamlit.app)
 
 ## License
 

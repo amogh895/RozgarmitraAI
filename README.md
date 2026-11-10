@@ -10,9 +10,8 @@ A Streamlit web application that delivers personalised career mentoring, resume 
 |------|-------------|
 | 👤 **My Profile** | Save your skills, experience, and career goals — used by every other feature |
 | 📄 **Resume Review** | Paste your resume and get an AI score, strengths, and actionable improvements |
-| 💼 **Career Guidance** | Conversational AI mentor — ask any career question and get personalised advice |
 | 🎤 **Interview Prep** | Generate role-specific interview questions with expert tips |
-| 🔍 **Job Match** | Browse sample listings and get an AI match score against your profile |
+
 
 ---
 
